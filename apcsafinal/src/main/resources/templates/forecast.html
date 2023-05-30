@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Weather Forecast ⛅️</title>
+  <link rel="stylesheet" th:href="@{/styles.css}" />
+</head>
+<body>
+<h1>Weather Forecast ⛅️</h1>
+
+<form action="/forecast" method="get">
+  <input type="text" name="city" placeholder="Enter city" required />
+  <button type="submit">Search</button>
+</form>
+
+<h2 th:if="${currentCity}">Weather Forecast for <span th:text="${currentCity}"></span></h2>
+
+<div th:if="${forecast}">
+  <div th:each="data : ${forecast}">
+    <h3 th:text="${data.key}"></h3>
+    <p>
+      Average Temperature: <span th:text="${data.value.averageTemp}"></span>°F
+      <br/>
+      Humidity: <span th:text="${data.value.averageHumidity}"></span>%
+    </p>
+    <hr/>
+  </div>
+</div>
+</body>
+</html>
